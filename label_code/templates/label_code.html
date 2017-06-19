@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" >
+    <title>验证码解析-手工标注</title>
+    <link rel = "stylesheet" href="http://cdn.amazeui.org/amazeui/2.4.0/css/amazeui.min.css">
+    <link rel = "icon" href="head.ico" >
+
+    <script>
+        function get_result(){
+            if(document.getElementById('result').value.length<3){
+                return false;
+            }else{
+                document.getElementById("res_hint").innerHTML='<div class="am-form-label am-active">'+'正在生成结果，请稍等...'+'</div>';
+                return true
+            }
+        }
+            
+        function get_next(){
+            window.location.reload();
+        }
+    </script>
+
+</head>
+<body>
+    <div class="am-topbar">
+        <h1 class="am-active">验证码识别在线标注-{{city}}</h1>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-10 am-u-sm-centered">
+            <div class="am-intro-left am-active" style="height:160px">
+                <label ><em>使用说明</em></label>
+                <p class="am-form-label am-active">感谢您的参与，请输入验证码图片正确值即可,大小写无关(可<code>enter</code>键提交)， 请注意标注正确，不确定的点击<code>下一张</code>跳过</p>
+            </div>
+
+            <div class='am-u-sm10 am-u-sm-centered'>
+                <form class="am-form-inline" role="form" enctype="multipart/form-data" action="/" method="post" onsubmit="return get_result()">
+                    <input style="display:none" name="fname" value="{{fname}}">
+                    <div class="am-field">
+                        完成: <code> {{finishedCnt}} </code> /{{totalCnt}}
+                    </div>
+                    <div class="am-field">
+                    <label>验证码图片:</label>
+                    <img src='{{fname}}' alt='验证码图片:{{fname}}', width="300">
+                    </div>
+                    
+                    <div class="am-input am-input-group-primary">
+                        <input class="am-form-field am-radius am-form-control" type="text" style='margin:10px' name="result" id='result' autofocus="True" placeholder="请输入正确值">
+                    </div>
+
+                        <button type="submit" class="am-btn am-btn-primary" value="提交">提交</button>
+                        <button onclick="get_next()" type='button' class="am-btn am-btn-danger" value="下一张">下一张</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <hr />
+    <script type="text/javascript" src="http://cdn.amazeui.org/amazeui/2.4.0/js/amazeui.min.js"></script>
+</body>
+</html>
